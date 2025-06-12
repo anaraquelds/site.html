@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>INTRODUÇÃO ÀS TECNOLOGIAS WEB</title>
+    <style>
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            margin: 0;
+            padding: 2em;
+            background-color: #f8f5ff;
+            color: #4a2d7a;
+        }
+        
+        .container { 
+            max-width: 800px; 
+            margin: auto; 
+            background: #fff; 
+            padding: 25px; 
+            border-radius: 12px; 
+            box-shadow: 0 4px 15px rgba(106, 63, 174, 0.1);
+            border: 1px solid #e0d6ff;
+        }
+        
+        h1 {
+            color: #6a3fae;
+            margin-bottom: 5px;
+        }
+        
+        h2 {
+            color: #6a3fae;
+            border-bottom: 2px solid #e0d6ff;
+            padding-bottom: 8px;
+            margin-top: 25px;
+        }
+        
+        .funcao { 
+            border-bottom: 1px solid #e0d6ff; 
+            padding-bottom: 20px; 
+            margin-bottom: 20px; 
+        }
+        
+        .funcao:last-child { 
+            border-bottom: none; 
+        }
+        
+        input[type="number"], 
+        input[type="text"] { 
+            width: 70px; 
+            padding: 10px; 
+            margin-right: 8px; 
+            border-radius: 6px; 
+            border: 1px solid #d1c4f3;
+            background-color: #faf8ff;
+            color: #4a2d7a;
+            font-size: 14px;
+        }
+        
+        input[type="number"]:focus, 
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #9c7bff;
+            box-shadow: 0 0 0 2px rgba(156, 123, 255, 0.2);
+        }
+        
+        button { 
+            padding: 10px 18px; 
+            background-color: #7e57c2; 
+            color: white; 
+            border: none; 
+            border-radius: 6px; 
+            cursor: pointer; 
+            font-weight: 500;
+            transition: all 0.2s ease;
+            margin-top: 5px;
+        }
+        
+        button:hover { 
+            background-color: #6a3fae;
+            transform: translateY(-1px);
+        }
+        
+        .resultado { 
+            margin-top: 15px; 
+            padding: 12px;
+            background-color: #f3eeff;
+            border-radius: 6px;
+            border-left: 4px solid #7e57c2;
+            color: #4a2d7a;
+        }
+        
+        p {
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>HTML e JavaScript</h1>
+    <h2>INTRODUÇÃO ÀS TECNOLOGIAS WEB</h2>
+
+    <div class="funcao">
+        <h2>1. Maior e Menor Valor</h2>
+        <p>Digite cinco valores inteiros:</p>
+        <input type="number" id="n1" placeholder="a">
+        <input type="number" id="n2" placeholder="b">
+        <input type="number" id="n3" placeholder="c">
+        <input type="number" id="n4" placeholder="d">
+        <input type="number" id="n5" placeholder="e">
+        <button onclick="executarMaiorMenor()">Verificar</button>
+        <p id="resultado1" class="resultado"></p>
+    </div>
+
+    <div class="funcao">
+        <h2>2. Verifica Vogal</h2>
+        <p>Digite um caractere:</p>
+        <input type="text" id="char" maxlength="1">
+        <button onclick="executarVogal()">Verificar</button>
+        <p id="resultado2" class="resultado"></p>
+    </div>
+
+    <div class="funcao">
+        <h2>3. Números Pares em um Intervalo</h2>
+        <p>Digite o limite inferior e superior:</p>
+        <input type="number" id="li" placeholder="início">
+        <input type="number" id="ls" placeholder="fim">
+        <button onclick="executarLimites()">Calcular</button>
+        <p id="resultado3" class="resultado"></p>
+    </div>
+
+    <div class="funcao">
+        <h2>4. Ordenar Valores</h2>
+        <p>Digite três valores inteiros:</p>
+        <input type="number" id="o1" placeholder="a">
+        <input type="number" id="o2" placeholder="b">
+        <input type="number" id="o3" placeholder="c">
+        <button onclick="executarOrdem()">Ordenar</button>
+        <p id="resultado4" class="resultado"></p>
+    </div>
+
+    <div class="funcao">
+        <h2>5. Positivo ou Negativo</h2>
+        <p>Digite um valor inteiro:</p>
+        <input type="number" id="valPosNeg">
+        <button onclick="executarPositivoNegativo()">Verificar</button>
+        <p id="resultado5" class="resultado"></p>
+    </div>
+
+    <div class="funcao">
+        <h2>6. Par ou Ímpar</h2>
+        <p>Digite um valor inteiro:</p>
+        <input type="number" id="valParImpar">
+        <button onclick="executarParImpar()">Verificar</button>
+        <p id="resultado6" class="resultado"></p>
+    </div>
+
+</div>
+
+<script>
+    function MAIOR_MENOR(a, b, c, d, e) {
+        const numeros = [a, b, c, d, e];
+        const maior = Math.max(...numeros);
+        const menor = Math.min(...numeros);
+        return `Maior valor: ${maior} | Menor valor: ${menor}`;
+    }
+
+    function executarMaiorMenor() {
+        const a = parseInt(document.getElementById('n1').value);
+        const b = parseInt(document.getElementById('n2').value);
+        const c = parseInt(document.getElementById('n3').value);
+        const d = parseInt(document.getElementById('n4').value);
+        const e = parseInt(document.getElementById('n5').value);
+        if ([a, b, c, d, e].some(isNaN)) {
+            alert("Por favor, preencha todos os cinco campos com números.");
+            return;
+        }
+        document.getElementById('resultado1').innerText = MAIOR_MENOR(a, b, c, d, e);
+    }
+
+    function VOGAL(c) {
+        if (typeof c !== 'string' || c.length !== 1) return 0;
+        const vogais = 'aeiouAEIOU';
+        return vogais.includes(c) ? 1 : 0;
+    }
+
+    function executarVogal() {
+        const char = document.getElementById('char').value;
+        if (char.length !== 1) {
+            alert("Por favor, digite apenas um caractere.");
+            return;
+        }
+        const resultado = VOGAL(char);
+        document.getElementById('resultado2').innerText = `Resultado: ${resultado} (${resultado === 1 ? 'É vogal' : 'Não é vogal'})`;
+    }
+
+    function LIMITES(li, ls) {
+        let pares = [];
+        let somatorio = 0;
+        for (let i = li + 1; i < ls; i++) {
+            if (i % 2 === 0) {
+                pares.push(i);
+                somatorio += i;
+            }
+        }
+        return `Pares no intervalo: [${pares.join(', ')}] | Somatório: ${somatorio}`;
+    }
+
+    function executarLimites() {
+        const li = parseInt(document.getElementById('li').value);
+        const ls = parseInt(document.getElementById('ls').value);
+        if (isNaN(li) || isNaN(ls) || li >= ls) {
+            alert("Por favor, digite um intervalo crescente válido.");
+            return;
+        }
+        document.getElementById('resultado3').innerText = LIMITES(li, ls);
+    }
+
+    function ORDEM(a, b, c) {
+        const numeros = [a, b, c];
+        numeros.sort((x, y) => x - y);
+        return numeros;
+    }
+
+    function executarOrdem() {
+        const a = parseInt(document.getElementById('o1').value);
+        const b = parseInt(document.getElementById('o2').value);
+        const c = parseInt(document.getElementById('o3').value);
+        if ([a, b, c].some(isNaN)) {
+            alert("Por favor, preencha todos os três campos com números.");
+            return;
+        }
+        const ordenados = ORDEM(a, b, c);
+        document.getElementById('resultado4').innerText = `Valores ordenados: [${ordenados.join(', ')}]`;
+    }
+
+    function POSITIVO_NEGATIVO(x) {
+        return x >= 0;
+    }
+
+    function executarPositivoNegativo() {
+        const x = parseInt(document.getElementById('valPosNeg').value);
+        if (isNaN(x)) {
+            alert("Por favor, digite um número.");
+            return;
+        }
+        const resultado = POSITIVO_NEGATIVO(x);
+        document.getElementById('resultado5').innerText = `O valor é positivo? ${resultado}`;
+    }
+
+    function PAR_IMPAR(x) {
+        return x % 2 === 0;
+    }
+
+    function executarParImpar() {
+        const x = parseInt(document.getElementById('valParImpar').value);
+        if (isNaN(x)) {
+            alert("Por favor, digite um número.");
+            return;
+        }
+        const resultado = PAR_IMPAR(x);
+        document.getElementById('resultado6').innerText = `O valor é par? ${resultado}`;
+    }
+</script>
+
+</body>
+</html>
